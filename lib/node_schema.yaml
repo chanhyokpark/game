@@ -1,0 +1,57 @@
+
+nodes:
+  # id: 다른 노드로 이동함
+  # result: 문자열 결과를 보여줌, 분기 바로 탈출
+
+  # branches: 사용자가 선택함
+  # dest: 즉시 이동, 사용 가능 분기가 없으면 바로 탈출, 여러 개 있으면 weight에 따라 가중치 부여해서 다음 분기 결정
+  # require: 분기 활성화 요구사항
+  # cond: dest에서 이동 요구사항
+
+  # 특수
+  '_after_branch':
+    description: '분기 선택 후 무조건 트리거됨, '
+    redirect: true
+    dest:
+      - cond:
+          hp: '<=0'
+        weight: 100
+        id: 죽음
+
+  '_after_encounter':
+    description: '스토리 블록이 끝난 다음 무조건 트리거됨'
+    redirect: true
+    dest:
+      - cond:
+          신뢰도_사용: true # 신뢰도 시스템 사용
+          신뢰도_경고함: false # 신뢰도 낮음 경고 발동한 적 없음
+          신뢰도: '<=10'
+        set:
+          신뢰도_경고함: true
+        weight: 100
+        id: 신뢰도_경고
+
+  죽음:
+    description: '결국 당신은 쓰러지고 말았습니다. 당신의 여정은 여기서 종료됩니다...'
+    image: 죽음
+    branches:
+      - description: 재시작
+        id: _restart
+
+  신뢰도_경고:
+    description: '당신의 신뢰도가 낮습니다. 팀원들이 당신을 의심하네요...'
+    branches:
+      - description: 연설하기
+        require:
+          연설력: '>0'
+        dest:
+          - weight: $연설력
+            set:
+              신뢰도: '+5'
+            result: '당신의 연설이 성공했습니다! 팀원들이 당신을 다시 보기 시작합니다.'
+          - weight: 2
+            result: '당신의 말을 아무도 듣지 않습니다...'
+  # 스토리
+
+  '1':
+    description: ''
