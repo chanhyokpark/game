@@ -1,0 +1,90 @@
+type: object
+properties:
+  nodes:
+    type: object
+    patternProperties:
+      ^[a-zA-Z0-9_가-힣]+$:
+        type: object
+        properties:
+          text:
+            type: string
+          image:
+            type: string
+          branch:
+            type: array
+            items:
+              type: object
+              properties:
+                text:
+                  type: string
+                id:
+                  type: string
+              required: [text, id]
+          random:
+            type: boolean
+          dest:
+            type: array
+            items:
+              type: object
+              properties:
+                cond:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                      - type: string
+                      - type: boolean
+                      - type: number
+                id:
+                  type: string
+                weight:
+                  type: number
+              required: [id]
+          next:
+            type: object
+            properties:
+              id:
+                type: string
+              set:
+                type: object
+                additionalProperties:
+                  anyOf:
+                    - type: string
+                    - type: boolean
+                    - type: number
+              text:
+                type: string
+            required: [id]
+          set:
+            type: object
+            additionalProperties:
+              anyOf:
+                - type: string
+                - type: boolean
+                - type: number
+          hide:
+            type: boolean
+    additionalProperties: false
+  texts:
+    type: object
+    patternProperties:
+      ^[a-zA-Z0-9_]+$:
+        type: object
+        properties:
+          dest:
+            type: array
+            items:
+              type: object
+              properties:
+                cond:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                      - type: string
+                      - type: boolean
+                      - type: number
+                text:
+                  type: string
+              required: [text]
+    additionalProperties: false
+required: [nodes]
+additionalProperties: false
