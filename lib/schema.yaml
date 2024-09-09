@@ -19,6 +19,22 @@ properties:
                   type: string
                 id:
                   type: string
+                cond:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                      - type: string
+                      - type: boolean
+                      - type: number
+                hide:
+                  type: boolean
+                set:
+                  type: object
+                  additionalProperties:
+                    anyOf:
+                      - type: string
+                      - type: boolean
+                      - type: number
               required: [text, id]
           random:
             type: boolean
