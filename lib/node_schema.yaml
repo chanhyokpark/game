@@ -1,57 +1,91 @@
 
 nodes:
-  # id: 다른 노드로 이동함
-  # result: 문자열 결과를 보여줌, 분기 바로 탈출
 
-  # branches: 사용자가 선택함
-  # dest: 즉시 이동, 사용 가능 분기가 없으면 바로 탈출, 여러 개 있으면 weight에 따라 가중치 부여해서 다음 분기 결정
-  # require: 분기 활성화 요구사항
-  # cond: dest에서 이동 요구사항
-
-  # 특수
-  '_after_branch':
-    description: '분기 선택 후 무조건 트리거됨, '
-    redirect: true
-    dest:
-      - cond:
-          hp: '<=0'
-        weight: 100
-        id: 죽음
-
-  '_after_encounter':
-    description: '스토리 블록이 끝난 다음 무조건 트리거됨'
-    redirect: true
-    dest:
-      - cond:
-          신뢰도_사용: true # 신뢰도 시스템 사용
-          신뢰도_경고함: false # 신뢰도 낮음 경고 발동한 적 없음
-          신뢰도: '<=10'
-        set:
-          신뢰도_경고함: true
-        weight: 100
-        id: 신뢰도_경고
-
-  죽음:
+  death:
     description: '결국 당신은 쓰러지고 말았습니다. 당신의 여정은 여기서 종료됩니다...'
     image: 죽음
-    branches:
-      - description: 재시작
+    branch:
+      - text: 재시작
         id: _restart
 
-  신뢰도_경고:
-    description: '당신의 신뢰도가 낮습니다. 팀원들이 당신을 의심하네요...'
-    branches:
-      - description: 연설하기
-        require:
-          연설력: '>0'
-        dest:
-          - weight: $연설력
-            set:
-              신뢰도: '+5'
-            result: '당신의 연설이 성공했습니다! 팀원들이 당신을 다시 보기 시작합니다.'
-          - weight: 2
-            result: '당신의 말을 아무도 듣지 않습니다...'
-  # 스토리
+  select_1:
+    random: true #  조건 맞는 거중 랜덤
+    dest:
+      - cond:
+          item1: '>3'
+          item2: true
+        id: node_1
+        weight: 3
+      - cond:
+          item1: 2
+        id: node_2
+        weight: 5
+      - id: node_3 # 기본값
+        weight: 0.01
 
-  '1':
-    description: ''
+  select_2: # 조건 맞는 것중 최상위
+    dest:
+      - cond:
+          item1: '!2'
+          item3: false
+        id: node_4
+      - id: node_5
+
+  node_1:
+    text: '당신은 갈림길에 도달합니다. 표지판 하나는 ~라고 써져 있고, (...)'
+    image: node_1
+    next: # 바로 다음으로 넘어가기
+      id: node_2
+
+  node_2:
+    text: '어디로 갈까요?'
+    branch:
+      - cond:
+          item1: 2
+          item2: true
+          visited_node_2_1: false
+        hide: true # 조건 충족시키지 못하면 숨기기
+        set:
+          item1: '-=2' # 2만큼 빼기
+          item3: true
+          hp: 3 # 3으로 맞추기
+        text: '주변을 분석한다'
+        id: node_2_1
+      - text: '왼쪽 갈림길'
+        set:
+          hp: 0
+        id: node_2_2
+      - text: '오른쪽 갈림길'
+        id: node_3
+
+  node_2_1:
+    text: '당신은 왼쪽 갈림길에 함정이 있는 것을 발견합니다!'
+    next:
+      id: node_2
+      set:
+        visited_node_2_1: true
+      text: '다행이다'
+
+  node_2_2:
+    text: '당신은 함정에 빠집니다!'
+    next:
+      id: node_3
+      text: '아야'
+
+  hub:
+    text: $hub_text
+    branch: # 허브에서 갈 수 있는 지역들/퀘스트 표시
+      - id: node_8
+        text: '마을로 이동'
+
+
+texts:
+  hub_text:
+    dest:
+      - cond:
+          item1: 0
+        text: '텍스트 1'
+      - cond:
+          item2: 1
+        text: '텍스트 2'
+      - text: '기본값 텍스트'
