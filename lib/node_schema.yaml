@@ -7,6 +7,7 @@
 # 특수 노드
 # _after_branch: 선택지 누른 다음 무조건 실행됨
 
+
 nodes:
   death:
     text: '결국 당신은 쓰러지고 말았습니다. 당신의 여정은 여기서 종료됩니다...'
@@ -100,7 +101,6 @@ nodes:
     branch: # 허브에서 갈 수 있는 지역들/퀘스트 표시
       - id: node_8
         text: '마을로 이동'
-
 
 texts:
   hub_text:
