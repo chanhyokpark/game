@@ -12,6 +12,7 @@ nodes:
       - id: node_1
         set: # 기본값 설정
           hp: 5
+          _prev_idx: -1
 
   _after_branch:
     random: true
@@ -20,7 +21,7 @@ nodes:
           hp: 0
         id: death
         weight: 1000000000
-      - id: _prev # 기본값
+      - id: _prev # 필수
         weight: 1
 
   _prev: # 무시하기

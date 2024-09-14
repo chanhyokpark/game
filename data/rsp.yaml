@@ -1,5 +1,5 @@
-//스케마 파일을 여기에 붙여넣기
-export const rawGameData = `
+# 예시: 가위바위보 게임
+
 $schema: './schema.yaml'
 
 nodes:
@@ -139,4 +139,3 @@ items:
   draws:
     name: '무승부'
     description: '무승부 횟수'
-`

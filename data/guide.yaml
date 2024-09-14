@@ -1,12 +1,14 @@
-# 템플릿 3.0
+# 템플릿 3.1
 
 # 1. 개념
 # 모든 게임 흐름은 '노드' 로 구성됨
+# 모든 변수는 아이템으로 저장됨, 아이템은 정수 타입으로만 저장되지만 true/false도 사용 가능
+# 변수가 존재하지 않으면 0으로 간주됨
 
 # 2. 텍스트
-# 설명문, 이미지 이름, 아이템 이름 등을 포함한 모든 텍스트는 다음 규칙이 적용됨:
+# 설명문, 이미지 이름, 아이템 이름, 목적지 노드 id, 계산식 등을 포함한 모든 텍스트는 다음 규칙이 적용됨:
 # * {{아이템}}: 아이템 값(정수)
-# * $텍스트 (여러 개 사용할 경우 {$텍스트}): texts의 해당 항목
+# * $텍스트 (여러 개 사용할 경우 {$텍스트}): texts의 해당 항목, 4. texts 참조
 # 예시: item1이 1이고, 현재 상황에서 $text1이 반환하는 값이 'abc' 일때, "당신은 {$text1}을(를) {{item1}}개 가지고 있습니다" 는 "당신은 abc을(를) 1개 가지고 있습니다"와 동일함
 
 # 2. cond
@@ -30,6 +32,7 @@
 
 # 4. texts
 # 조건에 맞는 텍스트 반환
+# 단순히 화면에 표시하는 텍스트 변경뿐만 아니라 조건에 따라 계산에 사용하는 변수 바꾸기({{$cond}}), 도착지 바꾸기 등 다양하게 활용 가능
 # cond와 text로 구성됨
 # text는 무조건 string임 (식에서 '값'에 사용해도 '0'과 같이 써야 함)
 # 기본값이 반드시 필요함
@@ -90,45 +93,48 @@ example_selector:
 # 선택지는 cond, id, set, hide, text로 구성(id는 필수)
 # 선택지의 text를 설정하지 않으면 '다음'으로 보임
 example_branch:
+  texts:
+    text1:
+      - text: node3
   nodes:
-    node_1:
+    node1:
       text: '당신은 갈림길에 도달합니다. 표지판 하나는 ~라고 써져 있고, (...)'
-      image: node_1
+      image: node1
       next: # 바로 다음으로 넘어가기
-        id: node_2
-    node_2:
+        id: node2
+    node2:
       text: '어디로 갈까요?'
       branch:
         - cond:
             item1: 2
             item2: true
-            visited_node_2_1: false
+            visited_node2_1: false
           hide: true # 조건 충족시키지 못하면 숨기기
           set:
             item1: '-=2'
             item3: true
             hp: 3 # 3으로 맞추기
           text: '주변을 분석한다'
-          id: node_2_1
+          id: node2_1
         - text: '왼쪽 갈림길'
           set:
             hp: '-=$hp_delta'
-          id: node_2_2
+          id: node2_2
         - text: '오른쪽 갈림길'
-          id: node_3
+          id: '$text1' # node3
 
-    node_2_1:
+    node2_1:
       text: '당신은 왼쪽 갈림길에 함정이 있는 것을 발견합니다!'
       next:
-        id: node_2
+        id: node2
         set:
-          visited_node_2_1: true
+          visited_node2_1: true
         text: '다행이다'
 
-    node_2_2:
+    node2_2:
       text: '당신은 함정에 빠집니다!'
       next:
-        id: node_3
+        id: node3
         text: '아야'
 
 # 6. 특수
@@ -138,8 +144,10 @@ example_branch:
 # * _after_branch: 사용자가 분기를 눌렀을 때, 해당 분기로 이동하기 전 무조건 이동하는 선택기 노드(사망, 랜덤인카운터 같은거 처리)
 # * _prev: 사용자가 분기를 눌렀을 때 그 분기의 id가 저장됨 (_after_branch에서 복귀하는 용도, id가 동적일 경우 분기를 누른 시점에 계산됨)
 # 예를 들어, node1에서 node2로 이동하는 분기를 누르면 _prev에 node2가 저장되고, _after_branch의 항목을 처리함
+# * _next: random이 false인 선택기의 도착지 id에만 사용 가능, 해당 도착지의 set을 적용하고 다음 도착지로 이동(switch-case 문에서 break 안쓴경우와 비슷함)
+# 이때 변경한 변수는 다음 도착지의 cond 결과를 변경하지 않음
 
-# 7. 아이템
+# 7. items
 # 프론트엔드 표시용으로만 사용됨, 알아서 이해하기
 
 
@@ -158,6 +166,7 @@ nodes:
       - id: node_1
         set: # 기본값 설정
           hp: 5
+          _prev_idx: -1 # 필수
 
 
   _after_branch:
@@ -175,7 +184,8 @@ nodes:
           item6: true
         id: special_2
         weight: 1
-      - id: _prev
+      - id: _prev # _after_branch 기능을 사용하지 않아도 반드시 필요함
+        weight: 1
 
   select_1:
     random: true #  조건 맞는 거중 랜덤

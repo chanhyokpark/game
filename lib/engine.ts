@@ -97,10 +97,18 @@ export class Engine {
             const weights = availableDests.map(d => d.weight ?? 1);
             const result = weightedRandom(indexes, weights);
             selectedDest = availableDests[result.item];
+            this.applyConditions(selectedDest.set ?? {});
         } else {
             selectedDest = availableDests[0];
+            for(const dest of availableDests) {
+                this.applyConditions(dest.set ?? {});
+                if(this.getText(dest.id) === '_next') {
+                    continue;
+                }
+                selectedDest = dest;
+                break;
+            }
         }
-        this.applyConditions(selectedDest.set ?? {});
         this.currentNode = this.getText(selectedDest.id);
     }
 
