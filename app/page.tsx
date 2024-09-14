@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { Engine } from '@/lib/engine';
 import { ConstantString, VariableString } from '@/lib/interfaces';
 
-
 const engine = new Engine();
 export default function Home() {
     const searchParams = useSearchParams();
@@ -39,7 +38,7 @@ export default function Home() {
     const itemDelta = engine.itemDelta;
 
 
-    function onClickBranch(idx: number) {
+    function onClickBranch(idx: number) { //분기 클릭했을 때 호출
         engine.processBranch(branchData[idx].branch);
         engine.currentNode = '_after_branch' as ConstantString;
         engine.getNode();

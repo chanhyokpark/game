@@ -76,10 +76,10 @@ export function weightedRandom(items: any[], weights: number[]) {
 }
 
 export class Engine {
-    nodes: { [key: string]: Node };
-    textSelectors: { [key: string]: TextSelector[] };
+    private readonly nodes: { [key: string]: Node };
+    private readonly textSelectors: { [key: string]: TextSelector[] };
     items: { [key: string]: number };
-    itemData: { [key: string]: ItemData };
+    private readonly itemData: { [key: string]: ItemData };
     currentNode: ConstantString;
 
     logs: string[] = [];
@@ -213,7 +213,7 @@ export class Engine {
     }
 
 
-    evaluateCondition(origKey: VariableString, cond: Condition): boolean {
+    private evaluateCondition(origKey: VariableString, cond: Condition): boolean {
         let key = this.getText(origKey);
         const value = this.items[key];
         if (typeof cond === 'string') {
@@ -245,7 +245,7 @@ export class Engine {
 
     }
 
-    evaluateConditions(conditions: Record<VariableString, Condition>): boolean {
+    private evaluateConditions(conditions: Record<VariableString, Condition>): boolean {
         for (const key in conditions) {
             if (!this.evaluateCondition(key as VariableString, conditions[key as VariableString])) {
                 return false;
@@ -254,7 +254,7 @@ export class Engine {
         return true;
     }
 
-    applyCondition(origKey: VariableString, cond: Condition) {
+    private applyCondition(origKey: VariableString, cond: Condition) {
         let key = this.getText(origKey);
         if(!this.items[key]) {
             this.items[key] = 0;
@@ -293,7 +293,7 @@ export class Engine {
         this.itemDelta[key] = (this.itemDelta[key] ?? 0) + this.items[key] - prevValue;
     }
 
-    applyConditions(conditions: Record<VariableString, Condition>) {
+    private applyConditions(conditions: Record<VariableString, Condition>) {
         if(Object.keys(conditions).length > 0) {
             this.logs.push('Applying conditions:');
         }
