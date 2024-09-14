@@ -1,0 +1,41 @@
+$schema: './schema.yaml'
+
+nodes:
+  death:
+    dest:
+      - id: _prev
+        set:
+          dead: true # 죽음, 프론트엔드에서 적절히 처리하기
+
+  _begin:
+    dest:
+      - id: node_1
+        set: # 기본값 설정
+          hp: 5
+
+  _after_branch:
+    random: true
+    dest:
+      - cond:
+          hp: 0
+        id: death
+        weight: 1000000000
+      - id: _prev # 기본값
+        weight: 1
+
+  _prev: # 무시하기
+    text: placeholder
+
+
+texts:
+  example:
+    - cond:
+        item1: 1
+      text: aaaa
+    - text: default
+
+items:
+  example:
+    name: 예시 아이템
+    image: example_image
+    description: 예시 설명

@@ -1,0 +1,290 @@
+# 템플릿 3.0
+
+# 1. 개념
+# 모든 게임 흐름은 '노드' 로 구성됨
+
+# 2. 텍스트
+# 설명문, 이미지 이름, 아이템 이름 등을 포함한 모든 텍스트는 다음 규칙이 적용됨:
+# * {{아이템}}: 아이템 값(정수)
+# * $텍스트 (여러 개 사용할 경우 {$텍스트}): texts의 해당 항목
+# 예시: item1이 1이고, 현재 상황에서 $text1이 반환하는 값이 'abc' 일때, "당신은 {$text1}을(를) {{item1}}개 가지고 있습니다" 는 "당신은 abc을(를) 1개 가지고 있습니다"와 동일함
+
+# 2. cond
+# 주어진 조건을 만족하는 지 여부
+# 모든 조건을 만족해야 참임
+# cond 변수를 설정하지 않으면 참임
+# - (아이템): (식) 형태
+# 식 작성법:
+# * 값(정수 또는 true/false): 값과 일치
+# * !값: 값이 아님
+# * >값, >=값, <값, <=값: 해당 연산자 적용
+# 예시: $text1이 반환하는 값이 item1이고 item2이 2일때, $text1: '<{{item2}}' 는 item1이 2보다 작을 때 참임
+
+# 3. set
+# 변수 값을 변경할 때 사용
+# 연산자를 사용할 때 값이 없으면 0임
+# - (아이템): (식) 형태
+# 식 작성법:
+# * 값(정수 또는 true/false): 해당 값으로 설정
+# * +=값, -=값, *=값, /=값: 해당 연산자 적용
+
+# 4. texts
+# 조건에 맞는 텍스트 반환
+# cond와 text로 구성됨
+# text는 무조건 string임 (식에서 '값'에 사용해도 '0'과 같이 써야 함)
+# 기본값이 반드시 필요함
+example_texts:
+  texts:
+    def: # 무조건 'item2' 반환
+      - text: 'item2'
+
+    abc:
+      - cond:
+          item1: '>{{$def}}' # item1이 item2보다 큼
+        text: 'item1>item2'
+      - cond:
+          $def: 0 # item2가 0임
+        text: 'item2==0'
+      - text: 'default' # 기본값
+
+
+# 5. 노드
+# nodes에 포함됨
+
+# 5.1. 선택기
+# 'dest' 요소가 있는 경우 선택기로 간주
+# 선택기는 화면에 표시되지 않으며, 조건에 맞는 선택지로 즉시 이동
+# dest는 가능한 목적지의 배열임, cond를 만족하면 아이템에 set에 명시된 조작을 가하고 다음 노드를 id로 설정
+# random이 true인 경우 가능한 목적지 중 랜덤으로 이동함(dest 안에 weight가 무조건 있어야 함), 아니면 위쪽 노드로 이동함
+example_selector:
+  nodes:
+    selector1:
+      dest:
+        - cond:
+            (...)
+          id: 'node{$next_node}' # $next_node가 1을 반환할 경우 node1
+        - cond:
+            (...)
+          set:
+            (...) # 이 목적지가 선택되었을 경우 작동됨
+          id: node2
+        - id: node3 # 기본값
+    selector2:
+      random: true # 랜덤
+      dest:
+        - cond:
+            (...)
+          id: node1
+          weight: 100000 # 조건 만족할 경우 무조건 선택됨
+        - cond:
+            (...)
+          id: node2
+          weight: 1
+        - id: node3 # 기본값
+          weight: 0.00001
+# 5.2. 분기점
+# 'dest' 요소가 없는 경우 분기점으로 간주
+# 화면에 표시됨
+# text, image, branches(next) 로 구성됨
+# 선택지가 여러개 있는 경우 branches, 하나만 있는 경우 next를 사용하면 됨
+# 선택지는 cond, id, set, hide, text로 구성(id는 필수)
+# 선택지의 text를 설정하지 않으면 '다음'으로 보임
+example_branch:
+  nodes:
+    node_1:
+      text: '당신은 갈림길에 도달합니다. 표지판 하나는 ~라고 써져 있고, (...)'
+      image: node_1
+      next: # 바로 다음으로 넘어가기
+        id: node_2
+    node_2:
+      text: '어디로 갈까요?'
+      branch:
+        - cond:
+            item1: 2
+            item2: true
+            visited_node_2_1: false
+          hide: true # 조건 충족시키지 못하면 숨기기
+          set:
+            item1: '-=2'
+            item3: true
+            hp: 3 # 3으로 맞추기
+          text: '주변을 분석한다'
+          id: node_2_1
+        - text: '왼쪽 갈림길'
+          set:
+            hp: '-=$hp_delta'
+          id: node_2_2
+        - text: '오른쪽 갈림길'
+          id: node_3
+
+    node_2_1:
+      text: '당신은 왼쪽 갈림길에 함정이 있는 것을 발견합니다!'
+      next:
+        id: node_2
+        set:
+          visited_node_2_1: true
+        text: '다행이다'
+
+    node_2_2:
+      text: '당신은 함정에 빠집니다!'
+      next:
+        id: node_3
+        text: '아야'
+
+# 6. 특수
+# 6.1. 특수 노드
+# * _begin: 시작점, (선택기로 설정하는 것을 권장, hp 등 초기 변수 설정함)
+# * _restart: 재시작
+# * _after_branch: 사용자가 분기를 눌렀을 때, 해당 분기로 이동하기 전 무조건 이동하는 선택기 노드(사망, 랜덤인카운터 같은거 처리)
+# * _prev: 사용자가 분기를 눌렀을 때 그 분기의 id가 저장됨 (_after_branch에서 복귀하는 용도, id가 동적일 경우 분기를 누른 시점에 계산됨)
+# 예를 들어, node1에서 node2로 이동하는 분기를 누르면 _prev에 node2가 저장되고, _after_branch의 항목을 처리함
+
+# 7. 아이템
+# 프론트엔드 표시용으로만 사용됨, 알아서 이해하기
+
+
+
+$schema: './schema.yaml'
+
+nodes:
+  death:
+    dest:
+      - id: _prev
+        set:
+          dead: true # 죽음, 프론트엔드에서 적절히 처리하기
+
+  _begin:
+    dest:
+      - id: node_1
+        set: # 기본값 설정
+          hp: 5
+
+
+  _after_branch:
+    random: true
+    dest:
+      - cond:
+          hp: '<=0'
+        id: death
+        weight: 1000000000
+      - cond:
+          item5: 2
+        id: special_1
+        weight: 100
+      - cond:
+          item6: true
+        id: special_2
+        weight: 1
+      - id: _prev
+
+  select_1:
+    random: true #  조건 맞는 거중 랜덤
+    dest:
+      - cond:
+          item1: '>3'
+          item2: true
+        id: node_1
+        weight: 3
+      - cond:
+          item1: 2
+        id: node_2
+        weight: 5
+      - id: node_3 # 기본값
+        weight: 0.01
+
+  select_2: # 조건 맞는 것중 최상위
+    dest:
+      - cond:
+          item1: '!2'
+          item3: false
+        id: node_4
+      - id: node_5
+
+  node_1:
+    text: '당신은 갈림길에 도달합니다. 표지판 하나는 ~라고 써져 있고, (...)'
+    image: node_1
+    next: # 바로 다음으로 넘어가기
+      id: node_2
+
+  node_2:
+    text: '어디로 갈까요?'
+    branch:
+      - cond:
+          item1: 2
+          item2: true
+          visited_node_2_1: false
+        hide: true # 조건 충족시키지 못하면 숨기기
+        set:
+          item1: '-=2' # 2만큼 빼기
+          item3: true
+          hp: 3 # 3으로 맞추기
+        text: '주변을 분석한다'
+        id: node_2_1
+      - text: '왼쪽 갈림길'
+        set:
+          hp: '-=$hp_delta'
+        id: node_2_2
+      - text: '오른쪽 갈림길'
+        id: node_3
+
+  node_2_1:
+    text: '당신은 왼쪽 갈림길에 함정이 있는 것을 발견합니다!'
+    next:
+      id: node_2
+      set:
+        visited_node_2_1: true
+      text: '다행이다'
+
+  node_2_2:
+    text: '당신은 함정에 빠집니다!'
+    next:
+      id: node_3
+      text: '아야'
+
+  node_3:
+    dest:
+      - id: hub
+
+  hub:
+    text: $hub_text
+    branch: # 허브에서 갈 수 있는 지역들/퀘스트 표시
+      - id: node_1
+        text: '마을로 이동'
+
+  _prev: # 무시
+    text: placeholder
+
+
+texts:
+  hub_text:
+    - cond:
+        item1: 0
+      text: '텍스트 1'
+    - cond:
+        item2: 1
+      text: '텍스트 2'
+    - text: '기본값 텍스트'
+  hp_delta:
+    - cond:
+        hp: '>4'
+      text: '3'
+    - cond:
+        hp: '>2'
+      text: '1'
+    - text: '999'
+
+  item1_desc:
+    - cond:
+        item1: '>100'
+      text: '너무 많이 들고 있네요!'
+    - text: '적당히 들고 있습니다.'
+
+items:
+  item1:
+    name: '아이템 1' # hide가 true이 아닌 경우 필수
+    description: '아이템 1입니다. {$item1_desc}'
+    image: 'item1_count{{item1}}'
+  item2: # 숨겨진 아이템의 경우 그냥 이 아이템이 존재한다는 걸 명시하는 용도임, 작성 안해도 됨
+    hide: true
+  hp:
+    hide: true

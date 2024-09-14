@@ -1,36 +1,36 @@
-# 모든 자원과 플래그는 아이템으로 구성되고, 화면은 노드로 구성됨
-# dest가 있는 경우, 텍스트를 표시하지 않고 바로 넘어감
-# dest가 있고 random이 true인 경우, 조건에 맞는 선택지를 고르고 가중치에 맞게 랜덤으로 고름
-# dest가 없는 경우, 텍스트와 분기를 표시함
-# 모든 text는 앞에 $를 붙일 수 있음, 이 경우 texts에 명시된 작업 수행
-
-# 특수 노드
-# _after_branch: 선택지 누른 다음 무조건 실행됨
-
-
+//스케마 파일을 여기에 붙여넣기
+export const rawGameData = `
 nodes:
   death:
-    text: '결국 당신은 쓰러지고 말았습니다. 당신의 여정은 여기서 종료됩니다...'
-    image: 죽음
-    branch:
-      - text: 재시작
-        id: _restart
+    dest:
+      - id: _prev
+        set:
+          dead: true
+
+  _begin:
+    dest:
+      - id: node_1
+        set: # 기본값 설정
+          hp: 5
+          _prev_idx: -1
+
 
   _after_branch:
     random: true
     dest:
       - cond:
-          hp: 0
+          hp: '<=0'
         id: death
         weight: 1000000000
       - cond:
-          item1: 2
+          item5: 2
         id: special_1
         weight: 100
       - cond:
-          item2: true
+          item6: true
         id: special_2
         weight: 1
+      - id: _prev
 
   select_1:
     random: true #  조건 맞는 거중 랜덤
@@ -77,7 +77,7 @@ nodes:
         id: node_2_1
       - text: '왼쪽 갈림길'
         set:
-          hp: 0
+          hp: '-=$hp_delta'
         id: node_2_2
       - text: '오른쪽 갈림길'
         id: node_3
@@ -96,19 +96,35 @@ nodes:
       id: node_3
       text: '아야'
 
+  node_3:
+    dest:
+      - id: hub
+
   hub:
     text: $hub_text
     branch: # 허브에서 갈 수 있는 지역들/퀘스트 표시
-      - id: node_8
+      - id: node_1
         text: '마을로 이동'
+
+  _prev:
+    text: placeholder
+
 
 texts:
   hub_text:
-    dest:
-      - cond:
-          item1: 0
-        text: '텍스트 1'
-      - cond:
-          item2: 1
-        text: '텍스트 2'
-      - text: '기본값 텍스트'
+    - cond:
+        item1: 0
+      text: '텍스트 1'
+    - cond:
+        item2: 1
+      text: '텍스트 2'
+    - text: 'hp: {{hp}}, hp delta: {$hp_delta}'
+  hp_delta:
+    - cond:
+        hp: '>4'
+      text: '2'
+    - cond:
+        hp: '>2'
+      text: '1'
+    - text: '999'
+`
