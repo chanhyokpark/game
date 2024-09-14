@@ -1,11 +1,12 @@
 'use client';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Engine } from '@/lib/engine';
 import { ConstantString, VariableString } from '@/lib/interfaces';
 
 const engine = new Engine();
+
 export default function Home() {
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -27,7 +28,7 @@ export default function Home() {
     engine.currentNode = engine.getText(id as VariableString);
 
     //UI에 표시할 정보들
-    const nodeInfo = engine.getCurrentNodeInfo(); //노드 처리하고, 노드 정보 가져옴
+    const nodeInfo =  useMemo(()=>engine.getCurrentNodeInfo(), [engine.currentNode]); //노드 처리하고, 노드 정보 가져옴
     const branchData = nodeInfo.branchData; //분기 목록(숨겨짐 설정된 분기는 미포함)
     const branchText = branchData.map((data) => engine.getBranchText(data.branch)); //분기 텍스트 목록
     const inventoryItems = engine.getAllItemInfo(); //모든(표준 인벤토리에 표시할) 아이템 정보 가져옴 (만약 특정 아이템을 툴팁 등지에 표시하려면 getItemInfo(key as VariableString) 사용)
@@ -36,6 +37,7 @@ export default function Home() {
     const dead = !!engine.items.dead;
     //이 분기로 진입한 시점에서 아이템 변화량 가져오기(아이템의 숨김 여부와 무관하게 모든 아이템이 {key: delta} 형태로 반환됨, 아이템 정보는 getItemInfo로 직접 가져와야 함)
     const itemDelta = engine.itemDelta;
+
 
 
     function onClickBranch(idx: number) { //분기 클릭했을 때 호출
