@@ -29,7 +29,6 @@ nodes:
         text: '보'
         set:
           player_choice: 2
-
   computer_choice:
     random: true
     dest:
@@ -45,7 +44,6 @@ nodes:
         weight: 1
         set:
           computer_choice: 2
-
   compare_choices:
     dest:
       - cond:
@@ -124,12 +122,15 @@ texts:
       text: '보'
 
 items:
+  # region 숨겨진 아이템
   player_choice:
     hide: true
   computer_choice:
     hide: true
   player_won:
     hide: true
+  # endregion
+  # region 표시용 아이템
   player_wins:
     name: '승리'
     description: '플레이어의 승리 횟수'
@@ -139,3 +140,4 @@ items:
   draws:
     name: '무승부'
     description: '무승부 횟수'
+  # endregion
