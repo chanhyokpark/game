@@ -82,6 +82,14 @@ export default function Home() {
                     ))}
                 </ul>
             </div>
+            <h2 className="text-xl">Inventory</h2>
+            <div className="p-4 border-2 border-gray-600">
+                <ul>
+                    {inventoryItems.map((item) => (
+                        <li key={item.name}>{item.name}({item.count}): {item.description}</li>
+                    ))}
+                </ul>
+            </div>
             <div className="flex flex-row justify-between">
                 <h2 className={'text-xl'}>Logs</h2>
                 <a onClick={() => {
