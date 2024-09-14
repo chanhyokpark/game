@@ -37,7 +37,7 @@ properties:
                       - type: string
                       - type: boolean
                       - type: number
-              required: [text, id]
+              required: [ text, id ]
           random:
             type: boolean
           dest:
@@ -63,7 +63,7 @@ properties:
                       - type: number
                 weight:
                   type: number
-              required: [id]
+              required: [ id ]
           next:
             type: object
             properties:
@@ -78,7 +78,7 @@ properties:
                     - type: number
               text:
                 type: string
-            required: [id]
+            required: [ id ]
           set:
             type: object
             additionalProperties:
@@ -107,7 +107,7 @@ properties:
             text:
               anyOf:
                 - type: string
-          required: [text]
+          required: [ text ]
     additionalProperties: false
   items:
     type: object
@@ -123,5 +123,5 @@ properties:
             type: string
           hide:
             type: boolean
-required: [nodes, texts]
+required: [ nodes, texts ]
 # additionalProperties: false
