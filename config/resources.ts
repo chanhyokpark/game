@@ -11,6 +11,7 @@ nodes:
       - id: game_start
         set:
           player_wins: 0
+          hp: 40
           computer_wins: 0
           draws: 0
           _prev_idx: -1

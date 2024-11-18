@@ -4,7 +4,7 @@ import {
     ConstantString,
     Dest, ItemData,
     ItemInfo,
-    Node,
+    Node, NodeInfo,
     TextSelector,
     VariableString,
 } from '@/lib/interfaces';
@@ -147,7 +147,7 @@ export class Engine {
         throw new Error('Infinite loop detected');
     }
 
-    getCurrentNodeInfo() {
+    getCurrentNodeInfo(): NodeInfo {
         const node = this.getNode();
         let text = this.getText(node.text);
         let image = node.image ? this.getText(node.image) : null;
