@@ -1,0 +1,43 @@
+.root {
+  position: absolute;
+  left: 4.6512%;
+  right: 63.9535%;
+  top: 2.1459%;
+  bottom: 93.8706%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.image3 {
+  position: absolute;
+  left: 18.8703px;
+  top: 4.9465px;
+  width: 32.4198px;
+  height: 27.2326px;
+  background-image:/* webpackIgnore: true */ url('assets/image32.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.image4 {
+  position: absolute;
+  left: 51.2901px;
+  top: 4.9465px;
+  width: 32.4198px;
+  height: 27.2326px;
+  background-image:/* webpackIgnore: true */ url('assets/image4.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.image5 {
+  position: absolute;
+  left: 83.7099px;
+  top: 4.9465px;
+  width: 32.4198px;
+  height: 27.2326px;
+  background-image:/* webpackIgnore: true */ url('assets/image5.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
