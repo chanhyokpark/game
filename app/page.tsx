@@ -50,7 +50,7 @@ export default function Home() {
         window.history.pushState(null, '', `?${nextParams}`);
     }
 
-    return (
+    /*return (
         <div className="p-3">
             <h1 className="text-3xl">Game Interface</h1>
             <h2 className="text-xl">Description</h2>
@@ -106,5 +106,114 @@ export default function Home() {
             </div>
         </div>
 
+    );*/
+    return (
+        <div className="min-h-screen bg-gray-900 text-gray-100 p-4">
+            <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
+                {/* Left Column - Stats & Inventory */}
+                <div className="col-span-1 space-y-4">
+                    {/* Stats Panel */}
+                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+                        <h2 className="text-xl font-bold text-yellow-400 mb-3">Character Stats</h2>
+                        <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                                <span>HP</span>
+                                <div className="w-32 h-4 bg-gray-700 rounded">
+                                    <div
+                                        className="h-full bg-red-600 rounded"
+                                        style={{width: `${Math.max(0, Math.min(100, hp))}%`}}
+                                    />
+                                </div>
+                            </div>
+                            {Object.entries(items).map(([key, value]) => (
+                                key !== 'hp' && (
+                                    <div key={key} className="flex justify-between items-center">
+                                        <span className="capitalize">{key}</span>
+                                        <span className="text-yellow-400">{value}</span>
+                                    </div>
+                                )
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Inventory Panel */}
+                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+                        <h2 className="text-xl font-bold text-yellow-400 mb-3">Inventory</h2>
+                        <div className="grid grid-cols-2 gap-2">
+                            {inventoryItems.map((item) => (
+                                <div
+                                    key={item.name}
+                                    className="bg-gray-700 p-2 rounded hover:bg-gray-600 cursor-pointer transition-colors"
+                                    title={item.description || ''}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <span className="capitalize">{item.name}</span>
+                                        <span className="text-yellow-400">{item.count}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Center Column - Main Game Content */}
+                <div className="col-span-2 space-y-4">
+                    {/* Image Panel */}
+                    {nodeInfo.imageSrc && (
+                        <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg h-64 relative">
+                            <div className="absolute inset-0 flex items-center justify-center text-gray-500">
+                                {nodeInfo.imageSrc ? `(Image: ${nodeInfo.imageSrc})` : 'No image available'}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Story Text Panel */}
+                    <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
+                        <p className="text-lg leading-relaxed">{nodeInfo.text}</p>
+                    </div>
+
+                    {/* Choices Panel */}
+                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+                        <h2 className="text-xl font-bold text-yellow-400 mb-3">What will you do?</h2>
+                        <div className="space-y-2">
+                            {branchData.map((branch, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => !branch.disabled && onClickBranch(idx)}
+                                    className={`w-full text-left p-3 rounded transition-colors ${
+                                        branch.disabled
+                                            ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                                            : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
+                                    }`}
+                                >
+                                    {branchText[idx]}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Game Log Panel */}
+                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+                        <div className="flex justify-between items-center mb-3">
+                            <h2 className="text-xl font-bold text-yellow-400">Game Log</h2>
+                            <button
+                                onClick={() => {
+                                    engine.logs = [];
+                                    router.refresh();
+                                }}
+                                className="text-sm text-gray-400 hover:text-yellow-400 transition-colors"
+                            >
+                                Clear Log
+                            </button>
+                        </div>
+                        <div className="h-32 overflow-y-auto space-y-1">
+                            {engine.logs.map((log, idx) => (
+                                <p key={idx} className="text-sm text-gray-400">{log}</p>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }
