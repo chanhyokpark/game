@@ -67,7 +67,7 @@
 .bOTTOM {
   transform-origin: top left;
   position: absolute;
-  left: 0%;
+  left: 0;
   top: 81.33%;     /* 758px/932 */
   width: 142.558%; /* 613px/430 */
   height: 18.669%;  /* 174px/932 */
@@ -117,7 +117,7 @@
   top: 53.648%;   /* 500px/932 */
   width: 88.605%; /* 381px/430 */
   height: min-content;
-  text-shadow: 0px 0px 15px #428bff;
+  text-shadow: 0 0 15px #428bff;
   flex-direction: column;
 }
 
@@ -174,7 +174,7 @@
   top: calc(50% - -19.151%); /* 178.5px/932 */
   width: 93.256%;  /* 401px/430 */
   height: 34.657%; /* 323px/932 */
-  filter: blur(0.5px);
+  filter: blur(0.5);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -211,7 +211,7 @@
   width: 14.186%; /* 61px/430 */
   border-radius: 1.86%;  /* 8px/430 */
   background-color: #222;
-  box-shadow: 0px 4px 14.2px 2px #ffd556;
+  box-shadow: 0 4px 14px 2px #ffd556;
 }
 
 .inventory_01 {
@@ -227,7 +227,7 @@
 .inventory_03 {
   left: 58.605%;  /* 252px/430 */
   top: 91.009%;   /* 848px/932 */
-  box-shadow: 0px 4px 14.2px 2px #fffefa;
+  box-shadow: 0 4px 14px 2px #fffefa;
 }
 
 .icon_01 {

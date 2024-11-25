@@ -113,8 +113,7 @@ export class Engine {
     }
 
     getBranchText(branch: Branch) {
-        let text = this.getText(branch.text ?? '다음');
-        return text;
+        return this.getText(branch.text ?? '다음');
     }
 
     getNode() {

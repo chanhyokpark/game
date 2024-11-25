@@ -4,7 +4,6 @@ import resets from './_resets.module.css';
 import { Ellipse1 } from './Ellipse1/Ellipse1';
 import { Heart3_Property1Default } from './Heart3_Property1Default/Heart3_Property1Default';
 import classes from './MainDesign.module.css';
-import { LinesIcon } from './LinesIcon';
 import { SpotlightIcon } from './SpotlightIcon';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Engine } from '@/lib/engine';
