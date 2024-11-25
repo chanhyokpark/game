@@ -107,6 +107,20 @@ export default function Home() {
         </div>
 
     );*/
+    const tmp = branchData.map((branch, idx) => (
+        <button
+            key={idx}
+            onClick={() => !branch.disabled && onClickBranch(idx)}
+            className={`w-full text-left p-3 rounded transition-colors ${
+                branch.disabled
+                    ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                    : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
+            }`}
+        >
+            {branchText[idx]}
+        </button>
+    ))
+
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100 p-4">
             <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4">
@@ -172,7 +186,7 @@ export default function Home() {
                         <p className="text-lg leading-relaxed">{nodeInfo.text}</p>
                     </div>
 
-                    {/* Choices Panel */}
+ {/* Choices Panel */}
                     <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
                         <h2 className="text-xl font-bold text-yellow-400 mb-3">What will you do?</h2>
                         <div className="space-y-2">
