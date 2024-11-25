@@ -69,7 +69,7 @@ export default function Page() {
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 ${resets.clapyResets} ${classes.root} max-w-screen max-h-screen aspect-[430/932]`}>
                 <div className={classes.sCREEN}></div>
                 <div className={classes.mID}></div>
-                <div className={classes.TOP}></div>
+                {/*<div className={classes.TOP}></div>*/}
                 <div className={classes.BOTTOM}></div>
                 <Ellipse1 />
                 <div className={classes.circle22}></div>
