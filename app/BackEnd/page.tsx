@@ -38,8 +38,6 @@ export default function Home() {
     //이 분기로 진입한 시점에서 아이템 변화량 가져오기(아이템의 숨김 여부와 무관하게 모든 아이템이 {key: delta} 형태로 반환됨, 아이템 정보는 getItemInfo로 직접 가져와야 함)
     const itemDelta = engine.itemDelta;
 
-
-
     function onClickBranch(idx: number) { //분기 클릭했을 때 호출
         engine.processBranch(branchData[idx].branch);
         engine.currentNode = '_after_branch' as ConstantString;

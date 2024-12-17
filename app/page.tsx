@@ -71,6 +71,7 @@ export default function Page() {
         window.history.pushState(null, '', `?${nextParams}`);
     }
 
+    console.log(itemDelta);
     return (
         <div className={''}>
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 ${resets.clapyResets} ${classes.root} max-w-screen max-h-screen aspect-[430/932]`}>
@@ -176,7 +177,21 @@ export default function Page() {
                 {/*<div className={classes.inventory_03}></div>*/}
                 {/*<div className={classes.icon_01}></div>*/}
                 {/*<div className={classes.icon_02}></div>*/}
-                {/*<div className={classes._6}>제 6장 - 가출</div>*/}
+                <div>
+                    {Object.entries(itemDelta)
+                        .filter(([item]) => {
+                            console.log('Checking item:', item);
+                            const result = engine.getItemInfo(item as VariableString);
+                            console.log('Result for', item, ':', result);
+                            return result !== null;
+                        })
+                        .map(([item, count], idx) => (
+                            <div key={idx} className={classes._6}>
+                                {item + " +" + String(count)}
+                            </div>
+                        ))}
+
+                </div>
                 {/*<div className={classes._5}>생수 +5</div>*/}
                 {/*<div className={classes._2}>온더락잔 +2</div>*/}
                 {/*<div className={classes._1}>비치발리볼 공 +1</div>*/}
@@ -184,6 +199,7 @@ export default function Page() {
                 {/*    className={classes.heart3}*/}
                 {/*    classes={{ image3: classes.image3, image4: classes.image4, image5: classes.image5 }}*/}
                 {/*/>*/}
+
             </div>
         </div>
     );
