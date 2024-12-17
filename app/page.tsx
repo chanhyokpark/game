@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Engine } from '@/lib/engine';
 import { ConstantString, VariableString } from '@/lib/interfaces';
 import { useMemo, useState } from 'react';
+import Image from 'next/image'
 
 interface Props {
     className?: string;
@@ -17,6 +18,7 @@ interface Props {
 const engine = new Engine();
 
 export default function Page() {
+    const [hideImage, setHideImage] = useState(false);
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -41,6 +43,11 @@ export default function Page() {
     const branchData = nodeInfo.branchData;
     const branchText = branchData.map((data) => engine.getBranchText(data.branch));
     const inventoryItems = engine.getAllItemInfo();
+    //인벤토리에 없지만 ui에 표시할 정보들은 직접 가져와야 함, 예시:
+    const hp = engine.items.hp ?? 0; //items가 아니라 무조건 engine.items로 가져와야 함
+    const dead = !!engine.items.dead;
+    //이 분기로 진입한 시점에서 아이템 변화량 가져오기(아이템의 숨김 여부와 무관하게 모든 아이템이 {key: delta} 형태로 반환됨, 아이템 정보는 getItemInfo로 직접 가져와야 함)
+    const itemDelta = engine.itemDelta;
 
     // 인벤토리 상태
     const [isInventoryOpen, setInventoryOpen] = useState(false);
@@ -69,12 +76,26 @@ export default function Page() {
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 ${resets.clapyResets} ${classes.root} max-w-screen max-h-screen aspect-[430/932]`}>
                 <div className={classes.sCREEN}></div>
                 <div className={classes.mID}></div>
-                {/*<div className={classes.TOP}></div>*/}
+                <div className={classes.TOP}></div>
                 <div className={classes.BOTTOM}></div>
-                <Ellipse1 />
+                {/*<Ellipse1 />*/}
                 <div className={classes.circle22}></div>
                 <div className={classes.bag} onClick={toggleInventory}></div> {/* 가방 클릭으로 인벤토리 열기 */}
-                <div className={classes.draw_01}></div>
+                (!hideImage && (
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={nodeInfo.imageSrc ? nodeInfo.imageSrc : "/assets/draw_01.png"}
+                    width={2000}
+                    height={2000}
+                    alt="게임 이미지"
+                    className={classes.draw_01}
+                    onError={() => {
+                        setHideImage(true);
+                        console.log("Debug");
+                    }}
+                />
+                ))
+                {/*<div className={`${classes.draw_01} bg-[url('assets/draw_01.png')]`}></div>*/}
                 <div className={classes.unnamed}>
                     <div className={classes.textBlock}>{nodeInfo.text}</div>
 
@@ -142,27 +163,27 @@ export default function Page() {
                     </div>
                 )}
 
-                <div className={`absolute ${classes.spotlight}`}>
-                    <SpotlightIcon className={classes.icon4} />
-                </div>
+                    <div className={`absolute ${classes.spotlight}`}>
+                        <SpotlightIcon className={classes.icon4} />
+                    </div>
                 {/*<div className={classes.lines}>*/}
                 {/*    <LinesIcon className={classes.icon5} />*/}
                 {/*</div>*/}
                 <div className={`absolute ${classes.noise}`}></div>
                 <div className={classes.setting}></div>
-                <div className={classes.inventory_01}></div>
-                <div className={classes.inventory_02}></div>
-                <div className={classes.inventory_03}></div>
-                <div className={classes.icon_01}></div>
-                <div className={classes.icon_02}></div>
-                <div className={classes._6}>제 6장 - 가출</div>
-                <div className={classes._5}>생수 +5</div>
-                <div className={classes._2}>온더락잔 +2</div>
-                <div className={classes._1}>비치발리볼 공 +1</div>
-                <Heart3_Property1Default
-                    className={classes.heart3}
-                    classes={{ image3: classes.image3, image4: classes.image4, image5: classes.image5 }}
-                />
+                {/*<div className={classes.inventory_01}></div>*/}
+                {/*<div className={classes.inventory_02}></div>*/}
+                {/*<div className={classes.inventory_03}></div>*/}
+                {/*<div className={classes.icon_01}></div>*/}
+                {/*<div className={classes.icon_02}></div>*/}
+                {/*<div className={classes._6}>제 6장 - 가출</div>*/}
+                {/*<div className={classes._5}>생수 +5</div>*/}
+                {/*<div className={classes._2}>온더락잔 +2</div>*/}
+                {/*<div className={classes._1}>비치발리볼 공 +1</div>*/}
+                {/*<Heart3_Property1Default*/}
+                {/*    className={classes.heart3}*/}
+                {/*    classes={{ image3: classes.image3, image4: classes.image4, image5: classes.image5 }}*/}
+                {/*/>*/}
             </div>
         </div>
     );
