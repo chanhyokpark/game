@@ -13,6 +13,7 @@ nodes:
           hp: 1
           _prev_idx: -1
   death:
+    text: '당신은 사망했습니다.'
     dest:
       - id: _prev
         set:
