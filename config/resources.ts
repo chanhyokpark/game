@@ -12,12 +12,17 @@ nodes:
         set:
           hp: 1
           _prev_idx: -1
-  death:
+          수첩: false
+          주머니칼: false
+          마스크: false
+          usb: false
+  _death:
     text: '당신은 사망했습니다.'
-    dest:
-      - id: _prev
-        set:
-          dead: true # 죽음, 프론트엔드에서 적절히 처리하기
+    branch:
+      - text: '마지막 순간으로 돌아가기'
+        id: _prev
+      - text: '처음으로 돌아가기'
+        id: _begin
 
   scene1_1:
     text: '당신은 학교 건물을 뒤로 하고 집을 향해 발걸음을 재촉하고 있습니다. 한여름의 뜨거운 햇빛에 달궈진 모래가 튀어 종아리를 때리지만 여느 때와 같이 당신에게는 집에 가고 싶다는 일념 뿐입니다. 늘 교문 근처에서 전단지를 나눠주고 있던 사람마저도 오늘은 마음에 들지 않네요.'
@@ -66,7 +71,7 @@ nodes:
   random_encounter:
     random: true
     dest:
-      - id: death
+      - id: _death
         weight: 1
       - id: scene2_1
         weight: 1
@@ -421,7 +426,7 @@ nodes:
     text: '엽은 자신의 방에 중요한 물건이 있을 것이란 희망을 접고 방을 나가려 합니다.\n"…?"\n마침 책상 아래에 수상한 USB 하나가 떨어져 있습니다.'
     image: '배경이미지1'
     branch:
-      - text: '  는다'
+      - text: '줍는다'
         id: temp_end
         set:
           usb: true
@@ -431,23 +436,26 @@ nodes:
   temp_end:
     text: '이야기는 계속됩니다...\n다음 에피소드를 기다려주세요.'
     image: '배경이미지1'
-    next:
-      id: _restart
+    branch:
+      - text: '다시 시작하기'
+        id: _begin
+        set:
+          usb: false
 
 texts:
   나: 엽
 
 items:
   수첩: 
-    name: 수첩과 볼펜
-    description: 무언가를 메모할 때 쓸 수 있을 것 같다
+    name: '수첩과 볼펜'
+    description: '무언가를 메모할 때 쓸 수 있을 것 같다'
   주머니칼:
-    name: 주머니칼
-    description: 어딘가 유용하게 쓸 수 있을 것 같은 주머니칼이다
+    name: '주머니칼'
+    description: '어딘가 유용하게 쓸 수 있을 것 같은 주머니칼이다'
   마스크:
-    name: 마스크
-    description: 먼지를 막아주는 마스크
+    name: '마스크'
+    description: '먼지를 막아주는 마스크'
   usb:
-    name: USB
-    description: 아버지가 남긴 것으로 보이는 USB
+    name: 'USB'
+    description: '아버지가 남긴 것으로 보이는 USB'
 `
