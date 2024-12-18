@@ -98,10 +98,16 @@ export default function Page() {
                 ))
                 {/*<div className={`${classes.draw_01} bg-[url('assets/draw_01.png')]`}></div>*/}
                 <div className={classes.unnamed}>
-                    <div className={classes.textBlock}>{nodeInfo.text}</div>
+                    <div className="flex-col">
+                        {nodeInfo.text.split('\\n').map((item, idx) => (
+                           <p className={classes.textBlock3} key={idx}>
+                               {item}
+                           </p>
+                        ))}
+                    </div>
 
                     {/* Choices Panel */}
-                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg mt-6">
                         <div className="flex-col gap-3">
                             {branchData.map((branch, idx) => (
                                 <button
@@ -113,56 +119,53 @@ export default function Page() {
                                             : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
                                     }`}
                                 >
-                                    {branchText[idx]}
+                                {branchText[idx]}
                                 </button>
                             ))}
                         </div>
                     </div>
-                    <div className={classes.textBlock18}>
-                        <p></p>
-                    </div>
                 </div>
 
-                {/* 게임 화면 내부 작은 인벤토리 창 */}
-                {isInventoryOpen && (
-                    <div
-                        className="absolute top-[10%] right-[0%] w-[100%] h-[60%] bg-red-400 z-500 overflow-y-auto p-4 rounded-lg shadow-lg border border-gray-300"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {/* 내부를 완전히 가리는 덮개 */}
-                        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-100 z-50"></div>
+                {/*/!* 게임 화면 내부 작은 인벤토리 창 *!/*/}
+                {/*{isInventoryOpen && (*/}
+                {/*    <div*/}
+                {/*        className="absolute top-[10%] right-[0%] w-[100%] h-[60%] bg-red-400 z-500 overflow-y-auto p-4 rounded-lg shadow-lg border border-gray-300"*/}
+                {/*        onClick={(e) => e.stopPropagation()}*/}
+                {/*    >*/}
+                {/*        /!* 내부를 완전히 가리는 덮개 *!/*/}
+                {/*        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-100 z-50"></div>*/}
 
-                        {/* 실제 콘텐츠 */}
-                        <div className="flex flex-col gap-3 relative z-10">
-                            <h2 className="col-span-3 text-lg font-bold mb-4 text-black">Inventory</h2>
-                            {inventoryItems.map((item, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex items-center gap-4 p-2 bg-red-300 rounded-md"
-                                >
-                                    {item.imageSrc && (
-                                        <img
-                                            src={item.imageSrc}
-                                            alt={item.name}
-                                            className="w-8 h-8"
-                                        />
-                                    )}
-                                    <div className="grid grid-cols-[1fr_2fr_1fr] gap-x-4 items-center">
-                                        <h3 className="text-sm font-semibold text-black text-left">
-                                            {item.name}
-                                        </h3>
-                                        <p className="text-xs text-gray-600 text-left">
-                                            {item.description ?? 'No description'}
-                                        </p>
-                                        <div className="text-gray-800 text-sm text-right">
-                                            x{item.count}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                {/*        /!* 실제 콘텐츠 *!/*/}
+                {/*        <div className="flex flex-col gap-3 relative z-10">*/}
+                {/*            <h2 className="col-span-3 text-lg font-bold mb-4 text-black">Inventory</h2>*/}
+                {/*            {inventoryItems.map((item, idx) => (*/}
+                {/*                <div*/}
+                {/*                    key={idx}*/}
+                {/*                    className="flex items-center gap-4 p-2 bg-red-300 rounded-md"*/}
+                {/*                >*/}
+                {/*                    {item.imageSrc && (*/}
+                {/*                        <img*/}
+                {/*                            src={item.imageSrc}*/}
+                {/*                            alt={item.name}*/}
+                {/*                            className="w-8 h-8"*/}
+                {/*                        />*/}
+                {/*                    )}*/}
+                {/*                    <div className="grid grid-cols-[1fr_2fr_1fr] gap-x-4 items-center">*/}
+                {/*                        <h3 className="text-sm font-semibold text-black text-left">*/}
+                {/*                            {item.name}*/}
+                {/*                        </h3>*/}
+                {/*                        <p className="text-xs text-gray-600 text-left">*/}
+                {/*                            {item.description ?? 'No description'}*/}
+                {/*                        </p>*/}
+                {/*                        <div className="text-gray-800 text-sm text-right">*/}
+                {/*                            x{item.count}*/}
+                {/*                        </div>*/}
+                {/*                    </div>*/}
+                {/*                </div>*/}
+                {/*            ))}*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*)}*/}
 
                     <div className={`absolute ${classes.spotlight}`}>
                         <SpotlightIcon className={classes.icon4} />
@@ -177,21 +180,21 @@ export default function Page() {
                 {/*<div className={classes.inventory_03}></div>*/}
                 {/*<div className={classes.icon_01}></div>*/}
                 {/*<div className={classes.icon_02}></div>*/}
-                <div>
-                    {Object.entries(itemDelta)
-                        .filter(([item]) => {
-                            console.log('Checking item:', item);
-                            const result = engine.getItemInfo(item as VariableString);
-                            console.log('Result for', item, ':', result);
-                            return result !== null;
-                        })
-                        .map(([item, count], idx) => (
-                            <div key={idx} className={classes._6}>
-                                {item + " +" + String(count)}
-                            </div>
-                        ))}
+                {/*<div>*/}
+                {/*    {Object.entries(itemDelta)*/}
+                {/*        .filter(([item]) => {*/}
+                {/*            console.log('Checking item:', item);*/}
+                {/*            const result = engine.getItemInfo(item as VariableString);*/}
+                {/*            console.log('Result for', item, ':', result);*/}
+                {/*            return result !== null;*/}
+                {/*        })*/}
+                {/*        .map(([item, count], idx) => (*/}
+                {/*            <div key={idx} className={classes._6}>*/}
+                {/*                {item + " +" + String(count)}*/}
+                {/*            </div>*/}
+                {/*        ))}*/}
 
-                </div>
+                {/*</div>*/}
                 {/*<div className={classes._5}>생수 +5</div>*/}
                 {/*<div className={classes._2}>온더락잔 +2</div>*/}
                 {/*<div className={classes._1}>비치발리볼 공 +1</div>*/}

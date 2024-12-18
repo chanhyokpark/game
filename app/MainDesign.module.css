@@ -125,21 +125,7 @@
 .textBlock,
 .textBlock2,
 .textBlock3,
-.textBlock4,
-.textBlock5,
-.textBlock6,
-.textBlock7,
-.textBlock8,
-.textBlock9,
-.textBlock10,
-.textBlock11,
-.textBlock12,
-.textBlock13,
-.textBlock14,
-.textBlock15,
-.textBlock16,
-.textBlock17,
-.textBlock18 {
+.textBlock4 {
   margin-top: 0;
   background-image: linear-gradient(180deg, #464646ff 0%, #ffff 13%, #ffff 87%, #464646ff 100%);
   color: #83BFFF;
@@ -158,6 +144,10 @@
 
 .textBlock {
   margin-bottom: 5%;
+}
+
+.textBlock3 {
+  margin-bottom: 1.5%;
 }
 
 .spotlight {
