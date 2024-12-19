@@ -17,13 +17,13 @@
   bottom: 86.8964%;
 }
 .image3.image3 {
-  background-image:/* webpackIgnore: true */ url('../public/assets/image32.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/image32.png');
 }
 .image4.image4 {
-  background-image:/* webpackIgnore: true */ url('../public/assets/image42.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/image42.png');
 }
 .image5.image5 {
-  background-image:/* webpackIgnore: true */ url('../public/assets/image52.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/image52.png');
 }
 .root {
   position: relative;
@@ -47,7 +47,7 @@
   top: 57.725%;    /* 538px/932 */
   width: 142.558%; /* 613px/430 */
   height: 10.944%;  /* 102px/932 */
-  background-image: linear-gradient(0, #0000 0%, #000f 40%), /* webpackIgnore: true */ url('../public/assets/mID.png');
+  background-image: linear-gradient(0, #0000 0%, #000f 40%), /* webpackIgnore: true */ url('../../public/assets/mID.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto, cover;
@@ -59,7 +59,7 @@
   top: -3.687%;    /* -34.3636px/932 */
   width: 142.558%; /* 613px/430 */
   height: 10.944%;  /* 102px/932 */
-  background-image: linear-gradient(-1.7deg, #0000 0%, #000f 22%), /* webpackIgnore: true */ url('../public/assets/TOP.png');
+  background-image: linear-gradient(-1.7deg, #0000 0%, #000f 22%), /* webpackIgnore: true */ url('../../public/assets/TOP.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto, cover;
@@ -71,7 +71,7 @@
   top: 81.33%;     /* 758px/932 */
   width: 142.558%; /* 613px/430 */
   height: 18.669%;  /* 174px/932 */
-  background-image: linear-gradient(-1.8deg, #0000 0%, #000f 78%), /* webpackIgnore: true */ url('../public/assets/bOTTOM.png');
+  background-image: linear-gradient(-1.8deg, #0000 0%, #000f 78%), /* webpackIgnore: true */ url('../../public/assets/bOTTOM.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto, cover;
@@ -95,7 +95,7 @@
   top: 90.558%;   /* 844px/932 */
   width: 7.674%;  /* 33px/430 */
   height: 5.15%;  /* 48px/932 */
-  background-image:/* webpackIgnore: true */ url('../public/assets/bag.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/bag.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -179,7 +179,7 @@
   top: calc(50% - -19.206%);  /* 179px/932 */
   width: 150.93%;   /* 391px/430 */
   height: 40.545%; /* 294px/932 */
-  background-image:/* webpackIgnore: true */ url('../public/assets/noise.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/noise.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -193,7 +193,7 @@
   top: 9.013%;    /* 84px/932 */
   width: 9.302%;  /* 40px/430 */
   height: 4.292%; /* 40px/932 */
-  background-image:/* webpackIgnore: true */ url('../public/assets/setting.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/setting.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -232,7 +232,7 @@
   top: 91.223%;   /* 850px/932 */
   width: 7.907%;  /* 34px/430 */
   height: 4.077%; /* 38px/932 */
-  background-image:/* webpackIgnore: true */ url('../public/assets/icon_01.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/icon_01.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -244,7 +244,7 @@
   top: 91.223%;   /* 850px/932 */
   width: 8.605%;  /* 37px/430 */
   height: 4.077%; /* 38px/932 */
-  background-image:/* webpackIgnore: true */ url('../public/assets/icon_02.png');
+  background-image:/* webpackIgnore: true */ url('../../public/assets/icon_02.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
