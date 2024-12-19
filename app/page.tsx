@@ -6,7 +6,7 @@ import { SpotlightIcon } from './SpotlightIcon';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Engine } from '@/lib/engine';
 import { ConstantString, VariableString } from '@/lib/interfaces';
-import { useMemo, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 
 interface Props {
     className?: string;
@@ -14,7 +14,7 @@ interface Props {
 
 const engine = new Engine();
 
-export default function Page() {
+function PageMain(){
     const [hideImage, setHideImage] = useState(false);
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -163,9 +163,9 @@ export default function Page() {
                 {/*    </div>*/}
                 {/*)}*/}
 
-                    <div className={`absolute ${classes.spotlight}`}>
-                        <SpotlightIcon className={classes.icon4} />
-                    </div>
+                <div className={`absolute ${classes.spotlight}`}>
+                    <SpotlightIcon className={classes.icon4} />
+                </div>
                 {/*<div className={classes.lines}>*/}
                 {/*    <LinesIcon className={classes.icon5} />*/}
                 {/*</div>*/}
@@ -202,4 +202,12 @@ export default function Page() {
             </div>
         </div>
     );
+}
+
+export default function Page() {
+    return(
+        <Suspense>
+            <PageMain />
+        </Suspense>
+    )
 }

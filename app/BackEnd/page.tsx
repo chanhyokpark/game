@@ -1,13 +1,13 @@
 'use client';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Engine } from '@/lib/engine';
 import { ConstantString, VariableString } from '@/lib/interfaces';
 
 const engine = new Engine();
 
-export default function Home() {
+function BackEnd(){
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -184,7 +184,7 @@ export default function Home() {
                         <p className="text-lg leading-relaxed">{nodeInfo.text}</p>
                     </div>
 
- {/* Choices Panel */}
+                    {/* Choices Panel */}
                     <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
                         <h2 className="text-xl font-bold text-yellow-400 mb-3">What will you do?</h2>
                         <div className="space-y-2">
@@ -228,4 +228,11 @@ export default function Home() {
             </div>
         </div>
     );
+}
+export default function Home() {
+    return(
+        <Suspense>
+            <BackEnd/>
+        </Suspense>
+    )
 }
