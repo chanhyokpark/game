@@ -58,7 +58,7 @@ nodes:
 
   scene1_5:
     text: '휘가 저렇게 뛰어가는 모습은 본 적이 없는데요. 성격도 급하지 않고 친구도 많은 휘가 당신보다 먼저 가는 일도 흔한 일은 아닙니다. 무슨 일이 있는 게 분명합니다. 휘에게 무슨 일이 있다면, 당신과도 관련되어 있을 확률이 높겠죠.'
-    image: ‘청휘2’
+    image: '청휘2'
     branch:
       - text: '휘를 따라간다'
         id: scene2_1
@@ -96,19 +96,19 @@ nodes:
       - text: '다시 밖으로 나간다'
         id: random_encounter
 
-scene2_2_01:
+  scene2_2_01:
     text: '편의점이라도 들렀다 갈까 밖으로 나섰지만, 날씨가 너무 덥습니다. 나오자마자 다시 들어가고 싶어지네요.'
     image: '배경이미지6'
     next:
       id: scene2_2
 
-random_encounter:
-  random: true
-  dest:
-    - id: _death
-      weight: 1
-    - id: scene2_2_01
-      weight: 1
+  random_encounter:
+    random: true
+    dest:
+      - id: _death
+        weight: 1
+      - id: scene2_2_01
+        weight: 1
 
   scene2_2_1:
     text: '당신은 엘리베이터 버튼을 누르고 기다립니다. 평소에 내려오던 속도보다 느린 것이 왠지 모르게 불안합니다.'
