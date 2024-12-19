@@ -1,15 +1,12 @@
 'use client';
 
 import resets from './_resets.module.css';
-import { Ellipse1 } from './Ellipse1/Ellipse1';
-import { Heart3_Property1Default } from './Heart3_Property1Default/Heart3_Property1Default';
 import classes from './MainDesign.module.css';
 import { SpotlightIcon } from './SpotlightIcon';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Engine } from '@/lib/engine';
 import { ConstantString, VariableString } from '@/lib/interfaces';
 import { useMemo, useState } from 'react';
-import Image from 'next/image'
 
 interface Props {
     className?: string;

@@ -3,7 +3,7 @@ export const rawGameData = `
 $schema: './schema.yaml'
 
 nodes:
-_after_branch:
+  _after_branch:
     dest:
       - id: _prev
   _begin:
@@ -360,7 +360,7 @@ random_encounter:
       id: scene7_2
 
   scene7_2:
-    text: '휘는 이어서 자신이 알아낸 단서들을 말합니다.\\n"근처 이웃들과 이야기를 나눠봤어요. 몇몇은 오늘 아침 경찰차 소리를 들었다고 했고, 또 어떤 사람들은 경찰들이 어딘가로 급히 뛰어가는 모습을 봤다고 했어요.”
+    text: '휘는 이어서 자신이 알아낸 단서들을 말합니다.\\n"근처 이웃들과 이야기를 나눠봤어요. 몇몇은 오늘 아침 경찰차 소리를 들었다고 했고, 또 어떤 사람들은 경찰들이 어딘가로 급히 뛰어가는 모습을 봤다고 했어요."'
     image: '청휘1'
     next:
       id: scene7_3
