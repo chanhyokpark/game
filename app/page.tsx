@@ -80,8 +80,8 @@ export default function Page() {
                 <div className={classes.TOP}></div>
                 <div className={classes.BOTTOM}></div>
                 {/*<Ellipse1 />*/}
-                <div className={classes.circle22}></div>
-                <div className={classes.bag} onClick={toggleInventory}></div> {/* 가방 클릭으로 인벤토리 열기 */}
+                {/*<div className={classes.circle22}></div>*/}
+                {/*<div className={classes.bag} onClick={toggleInventory}></div> /!* 가방 클릭으로 인벤토리 열기 *!/*/}
                 (!hideImage && (
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -92,7 +92,6 @@ export default function Page() {
                     className={classes.draw_01}
                     onError={() => {
                         setHideImage(true);
-                        console.log("Debug");
                     }}
                 />
                 ))
@@ -100,26 +99,26 @@ export default function Page() {
                 <div className={classes.unnamed}>
                     <div className="flex-col">
                         {nodeInfo.text.split('\\n').map((item, idx) => (
-                           <p className={classes.textBlock3} key={idx}>
-                               {item}
-                           </p>
+                            <p className={classes.textBlock3} key={idx}>
+                                {item}
+                            </p>
                         ))}
                     </div>
-
+                    <div className={classes.textToChoicesGap}></div>
                     {/* Choices Panel */}
-                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg mt-6">
-                        <div className="flex-col gap-3">
+                    <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+                        <div className="flex-col gap-3 absolute">
                             {branchData.map((branch, idx) => (
                                 <button
                                     key={idx}
                                     onClick={() => !branch.disabled && onClickBranch(idx)}
                                     className={`w-full text-left p-3 rounded transition-colors ${
                                         branch.disabled
-                                            ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-                                            : 'bg-gray-700 hover:bg-gray-600 text-white cursor-pointer'
+                                            ? 'text-gray-500 cursor-not-allowed'
+                                            : 'hover:bg-gray-600 text-white cursor-pointer'
                                     }`}
                                 >
-                                {branchText[idx]}
+                                    {branchText[idx]}
                                 </button>
                             ))}
                         </div>
@@ -174,7 +173,7 @@ export default function Page() {
                 {/*    <LinesIcon className={classes.icon5} />*/}
                 {/*</div>*/}
                 <div className={`absolute ${classes.noise}`}></div>
-                <div className={classes.setting}></div>
+                {/*<div className={classes.setting}></div>*/}
                 {/*<div className={classes.inventory_01}></div>*/}
                 {/*<div className={classes.inventory_02}></div>*/}
                 {/*<div className={classes.inventory_03}></div>*/}

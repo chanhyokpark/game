@@ -116,7 +116,6 @@
   left: 6.744%;   /* 29px/430 */
   top: 53.648%;   /* 500px/932 */
   width: 88.605%; /* 381px/430 */
-  height: min-content;
   text-shadow: 0 0 15px #428bff;
   flex-direction: column;
 }
@@ -128,15 +127,15 @@
 .textBlock4 {
   margin-top: 0;
   background-image: linear-gradient(180deg, #464646ff 0%, #ffff 13%, #ffff 87%, #464646ff 100%);
-  color: #83BFFF;
+  color: #73abe6;
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-width: 0.4px;
-  font-size: 14px;  /* 14px/932 * 100 */
+  -webkit-text-stroke-width: thin;
+  font-size: 90%;  /* 14px/932 * 100 */
   line-height: 120%;
   font-family: NanumGothicCoding, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
   'Liberation Sans', sans-serif;
@@ -148,6 +147,10 @@
 
 .textBlock3 {
   margin-bottom: 1.5%;
+}
+
+.textToChoicesGap {
+  margin-top: 5%;
 }
 
 .spotlight {
@@ -174,8 +177,8 @@
   position: absolute;
   left: calc(50% - 2.674%);   /* 11.5px/430 */
   top: calc(50% - -19.206%);  /* 179px/932 */
-  width: 200.93%;   /* 391px/430 */
-  height: 31.545%; /* 294px/932 */
+  width: 150.93%;   /* 391px/430 */
+  height: 40.545%; /* 294px/932 */
   background-image:/* webpackIgnore: true */ url('../public/assets/noise.png');
   background-position: center;
   background-repeat: no-repeat;
