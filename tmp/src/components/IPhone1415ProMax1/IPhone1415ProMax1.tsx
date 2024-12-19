@@ -19,15 +19,14 @@ interface Props {
 export const IPhone1415ProMax1: FC<Props> = memo(function IPhone1415ProMax1(props = {}) {
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
-      <div className={classes.rectangle2}></div>
-      <div className={classes.image}></div>
-      <div className={classes.image2}></div>
-      <div className={classes.image6}></div>
+      <div className={classes.sCREEN}></div>
+      <div className={classes.mID}></div>
+      <div className={classes.TOP}></div>
+      <div className={classes.bOTTOM}></div>
       <Ellipse1 />
-      <div className={classes.rectangle5}></div>
-      <div className={classes.image1}></div>
-      <div className={classes.image22}></div>
-      <div className={classes.rectangle6}></div>
+      <div className={classes.circle22}></div>
+      <div className={classes.bag}></div>
+      <div className={classes.draw_01}></div>
       <div className={classes.unnamed}>
         <div className={classes.textBlock}>시발 여기 내용 대충 들어가고 이런식으로 뭔가 </div>
         <div className={classes.textBlock2}>그럴듯하게</div>
@@ -65,12 +64,12 @@ export const IPhone1415ProMax1: FC<Props> = memo(function IPhone1415ProMax1(prop
         <LinesIcon className={classes.icon5} />
       </div>
       <div className={classes.noise}></div>
-      <div className={classes.image62}></div>
-      <div className={classes.rectangle146525}></div>
-      <div className={classes.rectangle146526}></div>
-      <div className={classes.rectangle146527}></div>
-      <div className={classes.image7}></div>
-      <div className={classes.image8}></div>
+      <div className={classes.setting}></div>
+      <div className={classes.inventory_01}></div>
+      <div className={classes.inventory_02}></div>
+      <div className={classes.inventory_03}></div>
+      <div className={classes.icon_01}></div>
+      <div className={classes.icon_02}></div>
       <div className={classes._6}>제 6장 - 가출</div>
       <div className={classes._5}>생수 +5</div>
       <div className={classes._2}>온더락잔 +2</div>

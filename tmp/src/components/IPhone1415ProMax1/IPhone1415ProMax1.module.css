@@ -79,7 +79,7 @@
   bottom: 86.8964%;
 }
 .image3.image3 {
-  background-image:/* webpackIgnore: true */ url('assets/image33.png');
+  background-image:/* webpackIgnore: true */ url('assets/image32.png');
 }
 .image4.image4 {
   background-image:/* webpackIgnore: true */ url('assets/image42.png');
@@ -96,52 +96,52 @@
   background-color: #fff;
   overflow: hidden;
 }
-.rectangle2 {
+.sCREEN {
   position: absolute;
   left: -2px;
-  top: 449px;
+  top: 441px;
   width: 432px;
   height: 490px;
   background-color: #000;
 }
-.image {
+.mID {
   transform-origin: top left;
   position: absolute;
   left: 612px;
   top: 538px;
   width: 613px;
   height: 102px;
-  background-image: linear-gradient(-3.1deg, #0000 0%, #000f 40%), /* webpackIgnore: true */ url('assets/image.png');
+  background-image: linear-gradient(-3.1deg, #0000 0%, #000f 40%), /* webpackIgnore: true */ url('assets/mID.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto, cover;
   transform: matrix(-1, 0, 0, -1, 0, 0);
 }
-.image2 {
+.TOP {
   position: absolute;
   left: -57.7459px;
   top: -34.3636px;
   width: 613px;
   height: 102px;
-  background-image: linear-gradient(-1.7deg, #0000 0%, #000f 22%), /* webpackIgnore: true */ url('assets/image2.png');
+  background-image: linear-gradient(-1.7deg, #0000 0%, #000f 22%), /* webpackIgnore: true */ url('assets/TOP.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto, cover;
 }
-.image6 {
+.bOTTOM {
   transform-origin: top left;
   position: absolute;
   left: 0px;
   top: 758px;
   width: 613px;
   height: 174px;
-  background-image: linear-gradient(-1.8deg, #0000 0%, #000f 78%), /* webpackIgnore: true */ url('assets/image3.png');
+  background-image: linear-gradient(-1.8deg, #0000 0%, #000f 78%), /* webpackIgnore: true */ url('assets/bOTTOM.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto, cover;
   transform: matrix(1, 0, 0, 1, 0, 0);
 }
-.rectangle5 {
+.circle22 {
   transform-origin: top left;
   position: absolute;
   left: 378.2215px;
@@ -153,36 +153,27 @@
   filter: blur(2px);
   transform: matrix(0.7071, 0.7071, -0.7071, 0.7071, 0, 0);
 }
-.image1 {
+.bag {
   position: absolute;
   left: 362px;
   top: 844px;
   width: 33px;
   height: 48px;
-  background-image:/* webpackIgnore: true */ url('assets/image1.png');
+  background-image:/* webpackIgnore: true */ url('assets/bag.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.image22 {
+.draw_01 {
   position: absolute;
   left: 70px;
   top: 155px;
   width: 289px;
   height: 249px;
-  background-image:/* webpackIgnore: true */ url('assets/image22.png');
+  background-image:/* webpackIgnore: true */ url('assets/draw_01.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.rectangle6 {
-  position: absolute;
-  left: 16px;
-  top: 498px;
-  width: 399px;
-  height: 305px;
-  background-color: #030303;
-  box-shadow: inset 0px 4px 6.8px 0px #00000040;
 }
 .unnamed {
   position: absolute;
@@ -484,18 +475,18 @@
   background-size: cover;
   transform: translate(-50%, -50%);
 }
-.image62 {
+.setting {
   position: absolute;
   left: 370px;
   top: 84px;
   width: 40px;
   height: 40px;
-  background-image:/* webpackIgnore: true */ url('assets/image6.png');
+  background-image:/* webpackIgnore: true */ url('assets/setting.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.rectangle146525 {
+.inventory_01 {
   opacity: 0.75;
   position: absolute;
   left: 94px;
@@ -506,7 +497,7 @@
   background-color: #222;
   box-shadow: 0px 4px 14.2px 2px #ffd556;
 }
-.rectangle146526 {
+.inventory_02 {
   opacity: 0.75;
   position: absolute;
   left: 173px;
@@ -517,7 +508,7 @@
   background-color: #222;
   box-shadow: 0px 4px 14.2px 2px #ffd556;
 }
-.rectangle146527 {
+.inventory_03 {
   opacity: 0.75;
   position: absolute;
   left: 252px;
@@ -528,24 +519,24 @@
   background-color: #222;
   box-shadow: 0px 4px 14.2px 2px #fffefa;
 }
-.image7 {
+.icon_01 {
   position: absolute;
   left: 107px;
   top: 850px;
   width: 34px;
   height: 38px;
-  background-image:/* webpackIgnore: true */ url('assets/image7.png');
+  background-image:/* webpackIgnore: true */ url('assets/icon_01.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.image8 {
+.icon_02 {
   position: absolute;
   left: 185px;
   top: 850px;
   width: 37px;
   height: 38px;
-  background-image:/* webpackIgnore: true */ url('assets/image8.png');
+  background-image:/* webpackIgnore: true */ url('assets/icon_02.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
