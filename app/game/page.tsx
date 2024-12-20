@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import resets from './_resets.module.css';
 import classes from './MainDesign.module.css';
 import { SpotlightIcon } from './SpotlightIcon';
@@ -79,19 +80,23 @@ function PageMain(){
                 {/*<Ellipse1 />*/}
                 {/*<div className={classes.circle22}></div>*/}
                 {/*<div className={classes.bag} onClick={toggleInventory}></div> /!* 가방 클릭으로 인벤토리 열기 *!/*/}
-                (!hideImage && (
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                    src={nodeInfo.imageSrc ? nodeInfo.imageSrc : "/assets/draw_01.png"}
-                    width={2000}
-                    height={2000}
-                    alt="게임 이미지"
-                    className={classes.draw_01}
-                    onError={() => {
-                        setHideImage(true);
-                    }}
-                />
-                ))
+                {!hideImage && (
+                    <div>
+                        <Image
+                            src={nodeInfo.imageSrc ? nodeInfo.imageSrc : "/assets/draw_01.png"}
+                            width={2000}
+                            height={2000}
+                            alt="게임 이미지"
+                            className={classes.draw_01}
+                            onLoadingComplete={(result) => {
+                                if (!result.naturalWidth) setHideImage(true); // 이미지 로딩 실패 감지
+                            }}
+                            priority
+                            loading="eager"
+                        />
+                    </div>
+                )}
+
                 {/*<div className={`${classes.draw_01} bg-[url('assets/draw_01.png')]`}></div>*/}
                 <div className={classes.unnamed}>
                     <div className="flex-col">
